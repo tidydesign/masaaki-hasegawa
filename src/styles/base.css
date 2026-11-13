@@ -56,6 +56,11 @@ ol {
   outline-offset: 2px;
 }
 
+/* No scrolling while the loader plays */
+html.is-loading {
+  overflow: hidden;
+}
+
 /* Lenis */
 html.lenis,
 html.lenis body {

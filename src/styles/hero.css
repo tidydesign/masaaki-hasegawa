@@ -1,0 +1,65 @@
+/*
+  Hero title "Creation is building a structure in chaos" (Figma: the title in each Home frame).
+  Centred on the first screen; it is also the loader, see src/animations/loader.js.
+  Settled state: first and last lines in ink, the middle one muted.
+*/
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100svh;
+  padding: 0 var(--header-padding);
+}
+
+.hero__title {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-hero);
+  font-weight: var(--font-weight-extrabold);
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.hero__line {
+  display: block;
+}
+
+/*
+  First and last lines: the word in muted grey with an ink copy over it, shown through a
+  mask that opens left to right as the page loads (the mask moves right, the copy moves
+  back left by the same amount, so the copy stays in place). Settled, the copy covers the word.
+*/
+.hero__word {
+  position: relative;
+  display: inline-block;
+  color: var(--color-muted);
+}
+
+.hero__fill {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.hero__fill-text {
+  display: block;
+  color: var(--color-ink);
+}
+
+/* Middle line comes up from under its own mask */
+.hero__line--middle {
+  overflow: hidden;
+  color: var(--color-muted);
+}
+
+.hero__middle-text {
+  display: block;
+}
+
+/* Until the loader has set up its start state */
+.js .hero__title,
+.js .header {
+  visibility: hidden;
+}

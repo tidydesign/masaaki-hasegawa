@@ -18,6 +18,29 @@ export const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)'
 
 export const prefersReducedMotion = () => window.matchMedia(REDUCED_MOTION_QUERY).matches
 
+// Loader on the hero title (src/animations/loader.js), in seconds.
+// 1. "Creation / in chaos" in grey, centred; the ink fills each word left to right
+//    as the page loads (here: demo jumps to 50%, 75%, 100%)
+// 2. Once filled, the two lines part up and down and the middle line comes up from
+//    under its mask between them
+// 3. At the same time the header slides down from the top
+export const LOADER = {
+  // Demo loading: progress jumps (0–1) and the pause (s) before each
+  demoSteps: [
+    { progress: 0.5, pause: 0.4 },
+    { progress: 0.75, pause: 0.5 },
+    { progress: 1, pause: 0.6 },
+  ],
+  // One fill jump
+  fill: { duration: 0.6, ease: EASE_OUT },
+  // Pause (s) once filled, before the lines part
+  hold: 0.2,
+  // Lines part, middle line comes up
+  reveal: { duration: 1.2, ease: 'power4.inOut' },
+  // Header slides down, starts with the reveal (s offset)
+  header: { at: 0.3, duration: DURATION.slow, ease: EASE_OUT },
+}
+
 // Nav link hover (CSS, --nav-hover-*): the light plate fades in, the label leaves upwards
 // under a one-line mask and fades out, its dark copy comes up from below
 export const NAV_HOVER = {

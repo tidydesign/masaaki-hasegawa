@@ -57,7 +57,32 @@
       </span>
     </header>
 
-    <main class="page"></main>
+    <main class="page">
+      <!--
+        Hero title, also the page loader (src/animations/loader.js):
+        "Creation / in chaos" fill with ink as the page loads, then part to let
+        the middle line in. The fill copies are decoration only.
+      -->
+      <section class="hero" aria-label="Intro">
+        <h1 class="hero__title">
+          <span class="hero__line hero__line--first">
+            <span class="hero__word">
+              Creation
+              <span class="hero__fill" aria-hidden="true"><span class="hero__fill-text">Creation</span></span>
+            </span>
+          </span>
+          <span class="hero__line hero__line--middle">
+            <span class="hero__middle-text">is building a structure</span>
+          </span>
+          <span class="hero__line hero__line--last">
+            <span class="hero__word">
+              in chaos
+              <span class="hero__fill" aria-hidden="true"><span class="hero__fill-text">in chaos</span></span>
+            </span>
+          </span>
+        </h1>
+      </section>
+    </main>
 
     <script type="module" src="/src/main.js"></script>
   </body>
