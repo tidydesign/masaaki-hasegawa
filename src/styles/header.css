@@ -1,0 +1,290 @@
+/*
+  Header (Figma component "Head"). Fixed over the page, no background of its own.
+  Mobile + Tablet: initials "M" / "H" and the burger (variant "Mobile")
+  Laptop: full name and the burger (variant "Tablet")
+  Desktop: full name and the nav bar (variant "Desktop")
+  Open burger: frame "Mobile - Home 2"
+*/
+
+.header {
+  position: fixed;
+  z-index: 100;
+  inset: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: var(--header-gap);
+  padding: var(--header-padding);
+}
+
+.header__name {
+  flex: 1 1 0;
+  min-width: 0;
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-display);
+  font-weight: var(--font-weight-extrabold);
+  line-height: var(--line-height-display);
+  text-transform: uppercase;
+  color: var(--color-ink);
+  white-space: nowrap;
+}
+
+.header__name--last {
+  text-align: right;
+}
+
+/* Below Laptop only the first letter of each name is shown */
+.header__name-rest {
+  display: none;
+}
+
+/* Nav bar: Desktop only */
+.header__nav {
+  display: none;
+}
+
+/* ---------- Burger menu ---------- */
+
+/* Keeps the closed burger's place in the row; the panel opens over the page from here */
+.menu {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  width: var(--menu-closed-width);
+  height: var(--menu-closed-height);
+}
+
+/*
+  The panel is always laid out at its open size. Closed, it is clipped down to the burger
+  (centred at the top); opening animates the clip out to the full panel. Scaling would
+  stretch the rounded corners, the clip keeps them sharp.
+*/
+.menu__panel {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  width: min(var(--menu-open-max-width), 100vw - 2 * var(--header-padding));
+  padding: 0 var(--space-4) var(--space-4);
+  background-color: var(--color-ink);
+  border-radius: var(--radius-s);
+  transform: translateX(-50%);
+  clip-path: inset(
+    0 calc(50% - var(--menu-closed-width) / 2) calc(100% - var(--menu-closed-height))
+      calc(50% - var(--menu-closed-width) / 2) round var(--radius-s)
+  );
+  transition: clip-path var(--menu-close-duration) var(--ease-default) var(--menu-close-delay);
+}
+
+.menu.is-open .menu__panel {
+  clip-path: inset(0 0 0 0 round var(--radius-s));
+  transition: clip-path var(--menu-open-duration) var(--ease-default);
+}
+
+/* Closed: the whole top row of the panel, of which only the burger is visible */
+.menu__toggle {
+  position: relative;
+  flex-shrink: 0;
+  height: var(--menu-closed-height);
+}
+
+/*
+  Lines: closed they sit ±3px around the middle of the burger.
+  Open, the X sits 2px lower (Figma: 36px icon under 4px of padding).
+  translate and rotate are animated separately: opening moves first and turns second,
+  closing turns first and moves second.
+*/
+.menu__toggle-line {
+  --line-y: calc(var(--menu-line-gap) / 2);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--menu-line-width);
+  height: 1px;
+  margin: -0.5px 0 0 calc(var(--menu-line-width) / -2);
+  background-color: var(--color-on-ink);
+  translate: 0 calc(var(--line-y) * var(--line-dir));
+  transition:
+    translate var(--menu-icon-duration) var(--ease-default),
+    rotate var(--menu-icon-duration) var(--ease-default);
+}
+
+.menu__toggle-line:first-child {
+  --line-dir: -1;
+}
+
+.menu__toggle-line:last-child {
+  --line-dir: 1;
+}
+
+@media (hover: hover) {
+  .menu:not(.is-open) .menu__toggle:hover .menu__toggle-line {
+    --line-y: calc(var(--menu-line-gap) / 2 + var(--menu-icon-hover-shift));
+  }
+}
+
+/* Closing (class set by src/components/menu.js for the length of it): turn back first, then part */
+.menu.is-closing .menu__toggle-line {
+  transition-delay: var(--menu-icon-step), 0s;
+}
+
+.menu.is-open .menu__toggle-line {
+  translate: 0 var(--menu-icon-open-offset);
+  rotate: calc(var(--menu-cross-angle) * var(--line-dir));
+  transition:
+    translate var(--menu-icon-duration) var(--ease-default),
+    rotate var(--menu-icon-duration) var(--ease-default) var(--menu-icon-step);
+}
+
+/* Links: hidden once the panel has closed, so they can't be tabbed to */
+.menu__nav {
+  visibility: hidden;
+  transition: visibility 0s linear calc(var(--menu-close-delay) + var(--menu-close-duration));
+}
+
+.menu.is-open .menu__nav {
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+.menu__nav .nav__item {
+  opacity: 0;
+  transition: opacity var(--menu-links-out-duration) var(--ease-default);
+}
+
+.menu.is-open .menu__nav .nav__item {
+  opacity: 1;
+  transition: opacity var(--menu-links-duration) var(--ease-default)
+    calc(var(--menu-links-delay) + var(--i, 0) * var(--menu-links-stagger));
+}
+
+/* ---------- Nav links (shared by the bar and the burger panel) ---------- */
+
+.nav__list {
+  display: flex;
+  gap: var(--space-4);
+}
+
+.nav__link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--nav-link-height);
+  font-family: var(--font-family-text);
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-caption);
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--color-on-ink);
+}
+
+/* Light plate behind the label: hover and current page */
+.nav__link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-bg);
+  border-radius: var(--radius-xs);
+  opacity: 0;
+  transition: opacity var(--nav-hover-duration) var(--ease-default);
+}
+
+/*
+  Label under a mask, one line tall. The original leaves upwards and fades out,
+  a dark copy (added by src/components/nav-links.js) comes up from below
+*/
+.nav__label {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  height: var(--line-height-caption);
+}
+
+.nav__label-text {
+  display: block;
+  transition:
+    translate var(--nav-hover-duration) var(--ease-default),
+    opacity var(--nav-hover-duration) var(--ease-default);
+}
+
+.nav__label-text--copy {
+  position: absolute;
+  inset: 0;
+  color: var(--color-ink);
+  translate: 0 100%;
+}
+
+.nav__link[aria-current="page"]::before {
+  opacity: 1;
+}
+
+.nav__link[aria-current="page"] .nav__label-text:not(.nav__label-text--copy) {
+  translate: 0 -100%;
+  opacity: 0;
+}
+
+.nav__link[aria-current="page"] .nav__label-text--copy {
+  translate: 0 0;
+}
+
+@media (hover: hover) {
+  .nav__link:hover::before {
+    opacity: 1;
+  }
+
+  .nav__link:hover .nav__label-text:not(.nav__label-text--copy) {
+    translate: 0 -100%;
+    opacity: 0;
+  }
+
+  .nav__link:hover .nav__label-text--copy {
+    translate: 0 0;
+  }
+}
+
+/* Without JS there is no copy: just turn the label dark */
+html:not(.js) .nav__link[aria-current="page"],
+html:not(.js) .nav__link:hover {
+  color: var(--color-ink);
+}
+
+/* Bar: one row on a dark plate */
+.nav--bar .nav__list {
+  padding: var(--space-4);
+  background-color: var(--color-ink);
+  border-radius: var(--radius-s);
+}
+
+.nav--bar .nav__item {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+/* Panel: one column, the panel itself is the plate */
+.nav--panel .nav__list {
+  flex-direction: column;
+}
+
+/* Laptop */
+@media (min-width: 1024px) {
+  .header__name-rest {
+    display: inline;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1441px) {
+  .menu {
+    display: none;
+  }
+
+  .header__nav {
+    display: block;
+    flex: 1 1 0;
+    min-width: var(--header-nav-min-width);
+    max-width: var(--header-nav-max-width);
+  }
+}

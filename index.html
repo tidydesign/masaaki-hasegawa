@@ -10,9 +10,55 @@
     </script>
   </head>
   <body>
-    <main class="page">
-      <h1 class="page__title">Masaaki Hasegawa</h1>
-    </main>
+    <header class="header">
+      <a class="header__name header__name--first" href="/" aria-label="Masaaki Hasegawa — home">
+        M<span class="header__name-rest">asaaki</span>
+      </a>
+
+      <!-- Burger (Mobile, Tablet, Laptop): opens into a panel with the same links -->
+      <div class="header__menu menu">
+        <div class="menu__panel">
+          <button
+            class="menu__toggle"
+            type="button"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="menu-nav"
+          >
+            <span class="menu__toggle-line"></span>
+            <span class="menu__toggle-line"></span>
+          </button>
+
+          <nav class="menu__nav nav nav--panel" id="menu-nav" aria-label="Main">
+            <ul class="nav__list">
+              <li class="nav__item" style="--i: 0"><a class="nav__link" href="#works">Works</a></li>
+              <li class="nav__item" style="--i: 1"><a class="nav__link" href="#about">About</a></li>
+              <li class="nav__item" style="--i: 2"><a class="nav__link" href="#events">Events</a></li>
+              <li class="nav__item" style="--i: 3"><a class="nav__link" href="#video">Video</a></li>
+              <li class="nav__item" style="--i: 4"><a class="nav__link" href="#contact">Contact</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+
+      <!-- Nav bar (Desktop) -->
+      <nav class="header__nav nav nav--bar" aria-label="Main">
+        <ul class="nav__list">
+          <li class="nav__item"><a class="nav__link" href="#works">Works</a></li>
+          <li class="nav__item"><a class="nav__link" href="#about">About</a></li>
+          <li class="nav__item"><a class="nav__link" href="#events">Events</a></li>
+          <li class="nav__item"><a class="nav__link" href="#video">Video</a></li>
+          <li class="nav__item"><a class="nav__link" href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <span class="header__name header__name--last" aria-hidden="true">
+        H<span class="header__name-rest">asegawa</span>
+      </span>
+    </header>
+
+    <main class="page"></main>
+
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

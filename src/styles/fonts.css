@@ -1,0 +1,17 @@
+/* Local font files (BDO Grotesk is not on Google Fonts, Suisse Intl is commercial) */
+
+@font-face {
+  font-family: "BDO Grotesk";
+  src: url("../assets/fonts/BDOGrotesk-VF.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Suisse Intl";
+  src: url("../assets/fonts/SuisseIntl-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}

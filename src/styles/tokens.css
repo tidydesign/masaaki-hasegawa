@@ -1,46 +1,94 @@
-/* Design tokens. Placeholders until they come from Figma Variables. */
+/*
+  Design tokens. The Figma file has no Variables yet, so values are taken from the layers
+  (file "Masaaki Hasegawa", page "UI Design").
+  Mobile-first: Mobile <480, Tablet 480–1023, Laptop 1024–1440, Desktop >1440.
+*/
 
 :root {
   /* Colors */
-  --color-bg: #fafafa;
-  --color-text: #101014;
-  --color-text-muted: #6b6b76;
-  --color-accent: #101014;
-  --color-focus: #101014;
+  --color-bg: #ebebeb;
+  --color-ink: #343434;
+  --color-on-ink: #ffffff;
+  --color-text: var(--color-ink);
+  --color-focus: var(--color-ink);
 
   /* Typography */
-  --font-family-base: system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-size-body: 1rem;
-  --font-size-title: clamp(2.5rem, 2rem + 2.5vw, 4.5rem);
-  --line-height-body: 1.5;
-  --line-height-title: 1.05;
+  --font-family-display: "BDO Grotesk", system-ui, sans-serif;
+  --font-family-text: "Suisse Intl", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  /* Display: the name in the header */
+  --font-size-display: 48px;
+  --line-height-display: 40px;
+
+  /* Small caps text: nav links */
+  --font-size-caption: 12px;
+  --line-height-caption: 16px;
 
   /* Spacing */
-  --space-xs: 8px;
-  --space-s: 16px;
-  --space-m: 24px;
-  --space-l: 48px;
-  --space-xl: 96px;
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
 
-  /* Layout */
-  --page-gutter: 16px;
-  --page-max-width: 1920px;
+  /* Radii */
+  --radius-xs: 2px;
+  --radius-s: 4px;
+
+  /* Header */
+  --header-padding: var(--space-8);
+  --header-gap: var(--space-16);
+  --header-nav-min-width: 480px;
+  --header-nav-max-width: 640px;
+
+  /* Nav links (bar and burger panel) */
+  --nav-link-height: 40px;
+
+  /* Burger menu */
+  --menu-closed-width: 96px;
+  --menu-closed-height: 40px;
+  --menu-open-max-width: 320px;
+  --menu-line-width: 32px;
+  --menu-icon-open-offset: 2px;
+  --menu-line-gap: 6px;
+  --menu-cross-angle: 30deg;
 
   /* Motion (keep in sync with src/animations/config.js) */
   --ease-default: cubic-bezier(.16, 1, .3, 1);
   --duration-fast: 400ms;
   --duration-base: 500ms;
   --duration-slow: 700ms;
+
+  /* Nav link hover: the plate fades in, the label leaves upwards under a mask,
+     its copy comes up from below */
+  --nav-hover-duration: var(--duration-fast);
+
+  /* Burger icon: lines part on hover; on open they first meet in the middle,
+     then turn into an X (the turn starts after this delay). Closing plays it backwards */
+  --menu-icon-hover-shift: 2px;
+  --menu-icon-duration: var(--duration-fast);
+  --menu-icon-step: 150ms;
+
+  /* Burger panel: opens out of the burger, then the links fade in top to bottom.
+     Closing: the links fade out together, then the panel shrinks back into the burger */
+  --menu-open-duration: var(--duration-slow);
+  --menu-links-delay: 150ms;
+  --menu-links-stagger: 50ms;
+  --menu-links-duration: var(--duration-fast);
+  --menu-links-out-duration: 200ms;
+  --menu-close-delay: 100ms;
+  --menu-close-duration: var(--duration-base);
 }
 
-@media (min-width: 480px) {
+/* Desktop */
+@media (min-width: 1441px) {
   :root {
-    --page-gutter: 32px;
-  }
-}
+    --font-size-display: 60px;
+    --line-height-display: 48px;
 
-@media (min-width: 1024px) {
-  :root {
-    --page-gutter: 48px;
+    --header-padding: var(--space-12);
+    --header-gap: var(--space-24);
   }
 }

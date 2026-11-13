@@ -18,9 +18,7 @@ html {
 
 body {
   min-height: 100vh;
-  font-family: var(--font-family-base);
-  font-size: var(--font-size-body);
-  line-height: var(--line-height-body);
+  font-family: var(--font-family-text);
   color: var(--color-text);
   background-color: var(--color-bg);
   -webkit-font-smoothing: antialiased;
@@ -68,16 +66,6 @@ html.lenis body {
   overflow: clip;
 }
 
-/* Temporary placeholder until the first section is laid out */
-.page {
-  padding: var(--space-xl) var(--page-gutter);
-}
-
-.page__title {
-  font-size: var(--font-size-title);
-  line-height: var(--line-height-title);
-}
-
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -85,6 +73,7 @@ html.lenis body {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
     scroll-behavior: auto !important;
   }
 }
