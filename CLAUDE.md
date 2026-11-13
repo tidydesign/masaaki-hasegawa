@@ -6,7 +6,7 @@
 - Vite + vanilla JS, без фреймворков
 - Анимации: GSAP (+ ScrollTrigger), плавный скролл: Lenis
 - Стили: чистый CSS, без Tailwind и препроцессоров
-- Деплой: GitHub → Vercel, автодеплой при push в main (репозиторий пока не создан)
+- Деплой: GitHub (tidydesign/masaaki-hasegawa) → Vercel, автодеплой при push в main
 
 ## Структура
 - index.html — разметка
@@ -27,9 +27,9 @@
 
 ## Responsive
 - Mobile-first, media queries через min-width
-- Диапазоны устройств: Mobile <640px, Tablet 640–1199px, Laptop 1200–1599px, Desktop ≥1600px
-- Брейкпоинты (min-width): 640px, 1200px, 1600px
-- Фреймы Figma (360 / 768 / 1440 / 1920) — визуализация типичного экрана внутри диапазона, а не границы
+- Диапазоны устройств: Mobile <480px, Tablet 480–1023px, Laptop 1024–1440px, Desktop >1440px
+- Брейкпоинты (min-width): 480px, 1024px, 1441px
+- Фреймы Figma — визуализация типичного экрана внутри диапазона, а не границы
 - Fluid-размеры (clamp) там, где дизайн это допускает
 
 ## Разметка
