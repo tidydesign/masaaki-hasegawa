@@ -17,6 +17,9 @@
 - src/assets/ — картинки и svg, которые проходят через сборку; public/ — файлы как есть
 - vite.config.js — многостраничная сборка: новые страницы добавлять в build.rollupOptions.input
 
+## Figma
+- Для этого проекта использовать MCP-сервер `figma-masaaki` (свой аккаунт Figma), а не общий `figma`
+
 ## Дизайн-токены
 - Цвета, шрифты и отступы берём из Figma Variables и кладём в CSS custom properties в tokens.css
 - Сейчас в tokens.css заглушки, заменить на значения из Figma
