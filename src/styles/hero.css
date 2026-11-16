@@ -48,10 +48,18 @@
   color: var(--color-ink);
 }
 
-/* Middle line comes up from under its own mask */
+/*
+  Middle line in two parts, each under its own mask. On one row both come up from below;
+  where the line wraps in two (narrow screens), they part from the centre like the outer lines
+*/
 .hero__line--middle {
-  overflow: hidden;
   color: var(--color-muted);
+}
+
+.hero__middle-part {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
 }
 
 .hero__middle-text {

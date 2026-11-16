@@ -24,6 +24,9 @@ export const prefersReducedMotion = () => window.matchMedia(REDUCED_MOTION_QUERY
 // 2. Once filled, the two lines part up and down and the middle line comes up from
 //    under its mask between them
 // 3. At the same time the header slides down from the top
+// Loader easing: cubic-bezier(.32, 0, 0, 1), in-out with a long soft landing
+const LOADER_EASE = CustomEase.create('loader', '0.32, 0, 0, 1')
+
 export const LOADER = {
   // Demo loading: progress jumps (0–1) and the pause (s) before each
   demoSteps: [
@@ -32,13 +35,13 @@ export const LOADER = {
     { progress: 1, pause: 0.6 },
   ],
   // One fill jump
-  fill: { duration: 0.6, ease: EASE_OUT },
+  fill: { duration: 0.8, ease: LOADER_EASE },
   // Pause (s) once filled, before the lines part
   hold: 0.2,
   // Lines part, middle line comes up
-  reveal: { duration: 1.2, ease: 'power4.inOut' },
+  reveal: { duration: 0.8, ease: LOADER_EASE },
   // Header slides down, starts with the reveal (s offset)
-  header: { at: 0.3, duration: DURATION.slow, ease: EASE_OUT },
+  header: { at: 0.3, duration: 0.8, ease: LOADER_EASE },
 }
 
 // Nav link hover (CSS, --nav-hover-*): the light plate fades in, the label leaves upwards

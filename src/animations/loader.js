@@ -15,7 +15,8 @@ export function initLoader({ lenis, reducedMotion }) {
   const first = title.querySelector('.hero__line--first')
   const last = title.querySelector('.hero__line--last')
   const middle = title.querySelector('.hero__line--middle')
-  const middleText = title.querySelector('.hero__middle-text')
+  const middleText = title.querySelectorAll('.hero__middle-text')
+  const middleParts = title.querySelectorAll('.hero__middle-part')
   const fills = title.querySelectorAll('.hero__fill')
   const fillTexts = title.querySelectorAll('.hero__fill-text')
 
@@ -42,7 +43,10 @@ export function initLoader({ lenis, reducedMotion }) {
     fillState(0).forEach(({ targets, vars }) => gsap.set(targets, vars))
     gsap.set(first, { y: gap })
     gsap.set(last, { y: () => -gap() })
-    gsap.set(middleText, { yPercent: 100 })
+    // On one row both parts come up from below. Wrapped in two, they part from the centre:
+    // the upper one comes up, the lower one comes down
+    const wrapped = middleParts[1].offsetTop > middleParts[0].offsetTop
+    gsap.set(middleText, { yPercent: (i) => (wrapped && i === 1 ? -100 : 100) })
     gsap.set(header, { yPercent: -100 })
     gsap.set([title, header], { visibility: 'visible' })
   }
@@ -82,7 +86,7 @@ export function initLoader({ lenis, reducedMotion }) {
     .then(reveal)
     .then(() => {
       // Clean up so the title reflows freely on resize
-      gsap.set([first, last, middleText, header, ...fills, ...fillTexts], { clearProps: 'transform' })
+      gsap.set([first, last, ...middleText, header, ...fills, ...fillTexts], { clearProps: 'transform' })
       lockScroll(false)
     })
 }
