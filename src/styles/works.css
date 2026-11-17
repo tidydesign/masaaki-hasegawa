@@ -57,12 +57,15 @@ html:not(.js) .project__gallery {
   flex: none;
 }
 
-/* Original proportions, scaled down to fit the max box */
+/*
+  Original proportions (--ratio, width / height, set on each image) scaled down to fit the
+  max box. The size comes from the ratio, not the loaded file, so the row has its final
+  width before the lazy photos arrive and the loop length is right from the start.
+*/
 .project__image {
-  width: auto;
+  width: min(var(--gallery-image-max-width), var(--gallery-image-max-height) * (var(--ratio)));
   height: auto;
-  max-width: var(--gallery-image-max-width);
-  max-height: var(--gallery-image-max-height);
+  aspect-ratio: var(--ratio);
   user-select: none;
   -webkit-user-drag: none;
 }

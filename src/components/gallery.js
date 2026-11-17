@@ -99,10 +99,13 @@ function initGallery(gallery, { reducedMotion }) {
 
   // Run only while on screen
   new IntersectionObserver(([entry]) => (visible = entry.isIntersecting)).observe(gallery)
-  new ResizeObserver(() => {
+  // Re-measure when the screen or the row changes size
+  const resize = new ResizeObserver(() => {
     fill()
     render()
-  }).observe(gallery)
+  })
+  resize.observe(gallery)
+  resize.observe(track)
 
   gsap.ticker.add(tick)
 }
