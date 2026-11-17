@@ -1,0 +1,76 @@
+/*
+  Custom cursor (src/components/cursor.js), mouse and trackpad only.
+  A small light dot blended with mode difference. Over a project gallery it turns solid ink
+  (normal blending) and grows into a disc with "Drag" in it; while dragging it shrinks back
+  to the dot, still ink.
+  The element is the large disc, scaled down for the dot, so only transform animates.
+*/
+
+.cursor {
+  display: none;
+}
+
+html.has-cursor,
+html.has-cursor * {
+  cursor: none !important;
+}
+
+html.has-cursor .cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--z-cursor);
+  display: block;
+  width: var(--cursor-size-large);
+  height: var(--cursor-size-large);
+  margin: calc(var(--cursor-size-large) / -2) 0 0 calc(var(--cursor-size-large) / -2);
+  pointer-events: none;
+  mix-blend-mode: difference;
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-default);
+}
+
+html.has-cursor .cursor.is-visible {
+  opacity: 1;
+}
+
+.cursor__disc {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: var(--color-cursor);
+  scale: var(--cursor-scale-small);
+  transition: scale var(--cursor-duration) var(--ease-default);
+}
+
+/* Same type as the header links */
+.cursor__label {
+  font-family: var(--font-family-text);
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-caption);
+  text-transform: uppercase;
+  color: var(--color-cursor-label);
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-default);
+}
+
+/* Over the photos: solid ink, no blending */
+html.has-cursor .cursor.is-over-media {
+  mix-blend-mode: normal;
+}
+
+.cursor.is-over-media .cursor__disc {
+  background-color: var(--color-cursor-on-media);
+}
+
+.cursor.is-drag .cursor__disc {
+  scale: 1;
+}
+
+.cursor.is-drag .cursor__label {
+  opacity: 1;
+}

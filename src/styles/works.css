@@ -1,0 +1,79 @@
+/*
+  Works: one block per project (Figma: "Frame 11" and the like in each Home frame).
+  Year and title centred, below them a row of photos that runs off both edges.
+  The gallery loops right to left and can be dragged, see src/components/gallery.js.
+*/
+
+.works {
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-gap);
+  padding-top: var(--section-gap);
+}
+
+.project {
+  display: flex;
+  flex-direction: column;
+  gap: var(--project-gap);
+  padding: var(--project-padding) 0;
+}
+
+.project__heading {
+  display: flex;
+  flex-direction: column;
+  padding: 0 var(--header-padding);
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.project__year {
+  color: var(--color-muted);
+}
+
+/* The row is as tall as the tallest photo can be; photos sit on its top edge */
+.project__gallery {
+  height: var(--gallery-image-max-height);
+  overflow: hidden;
+}
+
+/* Without JS the row scrolls by hand */
+html:not(.js) .project__gallery {
+  overflow-x: auto;
+}
+
+.project__track {
+  display: flex;
+  gap: var(--gallery-gap);
+  align-items: flex-start;
+  width: max-content;
+}
+
+.project__item {
+  flex: none;
+}
+
+/* Original proportions, scaled down to fit the max box */
+.project__image {
+  width: auto;
+  height: auto;
+  max-width: var(--gallery-image-max-width);
+  max-height: var(--gallery-image-max-height);
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Draggable once the gallery script runs; vertical swipes still scroll the page.
+   With the custom cursor (cursor.css) the system cursor is hidden and these don't show */
+.project__gallery.is-draggable {
+  cursor: grab;
+  touch-action: pan-y;
+}
+
+.project__gallery.is-dragging {
+  cursor: grabbing;
+}

@@ -12,6 +12,11 @@
   --color-on-ink: #ffffff;
   --color-text: var(--color-ink);
   --color-focus: var(--color-ink);
+  /* Custom cursor: light and blended with mode difference over the page,
+     solid ink with a white label over the photos */
+  --color-cursor: #cccccc;
+  --color-cursor-on-media: var(--color-ink);
+  --color-cursor-label: var(--color-on-ink);
 
   /* Typography */
   --font-family-display: "BDO Grotesk", system-ui, sans-serif;
@@ -30,6 +35,9 @@
   --font-size-caption: 12px;
   --line-height-caption: 16px;
 
+  /* Project heading: year and title */
+  --font-size-label: 16px;
+
   /* Spacing */
   --space-4: 4px;
   --space-8: 8px;
@@ -46,6 +54,8 @@
   --header-gap: var(--space-16);
   --header-nav-min-width: 480px;
   --header-nav-max-width: 640px;
+  /* The name sets the header's height */
+  --header-height: calc(var(--line-height-display) + 2 * var(--header-padding));
 
   /* Nav links (bar and burger panel) */
   --nav-link-height: 40px;
@@ -58,6 +68,23 @@
   --menu-icon-open-offset: 2px;
   --menu-line-gap: 6px;
   --menu-cross-angle: 30deg;
+
+  /* Works: project blocks with a looping photo gallery.
+     Photos keep their proportions inside the max box.
+     --section-gap: from the hero title to the first project and between projects
+     (measured to the project block, which has its own padding) */
+  --section-gap: 320px;
+  --project-padding: 48px;
+  --project-gap: 24px;
+  --gallery-gap: var(--space-4);
+  --gallery-image-max-width: 360px;
+  --gallery-image-max-height: 480px;
+
+  /* Custom cursor: a small dot that grows into a "Drag" disc over the galleries */
+  --cursor-size-large: 120px;
+  /* The small dot is the large disc scaled down: 12px / 120px */
+  --cursor-scale-small: calc(12 / 120);
+  --z-cursor: 1000;
 
   /* Motion (keep in sync with src/animations/config.js) */
   --ease-default: cubic-bezier(.16, 1, .3, 1);
@@ -84,12 +111,16 @@
   --menu-links-out-duration: 200ms;
   --menu-close-delay: 100ms;
   --menu-close-duration: var(--duration-base);
+
+  /* Cursor: grows into the "Drag" disc over a gallery, shrinks back while dragging */
+  --cursor-duration: var(--duration-base);
 }
 
 /* Tablet */
 @media (min-width: 480px) {
   :root {
     --font-size-hero: 48px;
+    --gallery-image-max-width: 420px;
   }
 }
 

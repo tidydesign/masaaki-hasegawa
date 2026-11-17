@@ -44,6 +44,22 @@ export const LOADER = {
   header: { at: 0.3, duration: 0.8, ease: LOADER_EASE },
 }
 
+// Project gallery (src/components/gallery.js): the photos loop right to left at a steady
+// speed and can be dragged; after a throw the row drifts on and eases back to that speed
+export const GALLERY = {
+  // Auto speed, px per second
+  speed: 50,
+  // How fast the row returns to the auto speed after a drag (per second, higher is quicker)
+  settleRate: 2.5,
+}
+
+// Custom cursor (src/components/cursor.js): follows the pointer with a slight lag.
+// Growing into the "Drag" disc and back is a CSS transition (--cursor-duration)
+export const CURSOR = {
+  follow: { duration: 0.15, ease: 'power3.out' },
+  duration: DURATION.base,
+}
+
 // Nav link hover (CSS, --nav-hover-*): the light plate fades in, the label leaves upwards
 // under a one-line mask and fades out, its dark copy comes up from below
 export const NAV_HOVER = {

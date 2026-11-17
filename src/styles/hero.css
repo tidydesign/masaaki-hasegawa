@@ -2,14 +2,18 @@
   Hero title "Creation is building a structure in chaos" (Figma: the title in each Home frame).
   Centred on the first screen; it is also the loader, see src/animations/loader.js.
   Settled state: first and last lines in ink, the middle one muted.
+
+  The section is only as tall as the title, so the works start --section-gap below it.
+  To centre the title, the top padding is half the screen minus half the title, which
+  src/components/hero-layout.js keeps in --hero-title-height. Never under the header.
 */
 
 .hero {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100svh;
-  padding: 0 var(--header-padding);
+  padding: max(
+      calc(50svh - var(--hero-title-height, 0px) / 2),
+      calc(var(--header-height) + var(--header-padding))
+    )
+    var(--header-padding) 0;
 }
 
 .hero__title {
